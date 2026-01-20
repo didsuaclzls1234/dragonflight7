@@ -16,4 +16,30 @@ public class Player : MonoBehaviour
 
         transform.Translate(distanceX, 0, 0);
     }
+
+    //istrigger 아닌 충돌
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            //충돌한 적 삭제
+            Destroy(collision.gameObject);
+            //자기자신 삭제
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            //적 삭제
+            Destroy(collision.gameObject);
+
+            //플레이어 삭제
+            Destroy(gameObject);
+
+
+        }
+    }
 }
