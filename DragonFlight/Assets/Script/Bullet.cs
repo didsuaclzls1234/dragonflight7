@@ -26,9 +26,17 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {   
+            //이펙트 생성
             GameObject go=Instantiate(effect, transform.position, Quaternion.identity);
             Destroy(go,1f);
+
+            //싱글톤 함수 호출
             SoundManager.Instance.SoundDie();
+            
+            //점수
+            GameManager.instance.AddScore(100);
+            
+            //적 충돌
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
